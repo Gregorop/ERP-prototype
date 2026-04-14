@@ -106,102 +106,73 @@ INSERT INTO customers (name, address) VALUES
 -- =====================================================
 
 INSERT INTO orders (customer_id, order_date) VALUES
-(1, '2024-01-15 10:30:00'),
-(1, '2024-02-20 14:45:00'),
-(2, '2024-01-18 11:15:00'),
-(3, '2024-01-22 09:30:00'),
-(4, '2024-02-05 16:20:00'),
-(5, '2024-02-10 13:10:00'),
-(2, '2024-02-25 15:45:00'),
-(6, '2024-03-01 10:00:00'),
-(7, '2024-03-05 12:30:00'),
-(8, '2024-03-10 09:15:00'),
-(9, '2024-03-12 17:45:00'),
-(10, '2024-03-15 11:20:00'),
-(3, '2024-03-18 14:30:00'),
-(4, '2024-03-20 13:15:00'),
-(5, '2024-03-25 10:45:00');
+((SELECT id FROM customers WHERE name = 'Иван Петров'), '2026-02-05 10:30:00'),
+((SELECT id FROM customers WHERE name = 'Иван Петров'), '2026-03-20 14:45:00'),
+((SELECT id FROM customers WHERE name = 'Мария Сидорова'), '2026-02-18 11:15:00'),
+((SELECT id FROM customers WHERE name = 'Алексей Иванов'), '2026-02-22 09:30:00'),
+((SELECT id FROM customers WHERE name = 'Елена Смирнова'), '2026-03-05 16:20:00'),
+((SELECT id FROM customers WHERE name = 'Дмитрий Козлов'), '2026-03-10 13:10:00'),
+((SELECT id FROM customers WHERE name = 'Мария Сидорова'), '2026-03-25 15:45:00'),
+((SELECT id FROM customers WHERE name = 'Анна Воробьева'), '2026-04-01 10:00:00'),
+((SELECT id FROM customers WHERE name = 'Сергей Михайлов'), '2026-04-05 12:30:00'),
+((SELECT id FROM customers WHERE name = 'Ольга Новикова'), '2026-04-10 09:15:00'),
+((SELECT id FROM customers WHERE name = 'Андрей Соколов'), '2026-04-12 17:45:00'),
+((SELECT id FROM customers WHERE name = 'Татьяна Кузнецова'), '2026-04-15 11:20:00'),
+((SELECT id FROM customers WHERE name = 'Алексей Иванов'), '2026-04-18 14:30:00'),
+((SELECT id FROM customers WHERE name = 'Елена Смирнова'), '2026-04-20 13:15:00'),
+((SELECT id FROM customers WHERE name = 'Дмитрий Козлов'), '2026-04-25 10:45:00');
 
 -- =====================================================
 -- 5. Вставка позиций заказов
 -- =====================================================
 
--- Заказ #1 (Иван Петров) - iPhone 14 Pro + Чехол
 INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(1, (SELECT id FROM products WHERE name = 'iPhone 14 Pro'), 1),
-(1, (SELECT id FROM products WHERE name = 'Чехол для телефона'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-02-05 10:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Иван Петров')), (SELECT id FROM products WHERE name = 'iPhone 14 Pro'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-02-05 10:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Иван Петров')), (SELECT id FROM products WHERE name = 'Чехол для телефона'), 2),
 
--- Заказ #2 (Иван Петров) - MacBook Pro + Зарядное устройство
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(2, (SELECT id FROM products WHERE name = 'MacBook Pro 14" M3'), 1),
-(2, (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-03-20 14:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Иван Петров')), (SELECT id FROM products WHERE name = 'MacBook Pro 14" M3'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-03-20 14:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Иван Петров')), (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 1),
 
--- Заказ #3 (Мария Сидорова) - Samsung Galaxy S23 + Наушники
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(3, (SELECT id FROM products WHERE name = 'Samsung Galaxy S23'), 1),
-(3, (SELECT id FROM products WHERE name = 'Наушники AirPods Pro'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-02-18 11:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Мария Сидорова')), (SELECT id FROM products WHERE name = 'Samsung Galaxy S23'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-02-18 11:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Мария Сидорова')), (SELECT id FROM products WHERE name = 'Наушники AirPods Pro'), 1),
 
--- Заказ #4 (Алексей Иванов) - Asus ROG + Джинсы
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(4, (SELECT id FROM products WHERE name = 'Asus ROG Zephyrus G14'), 1),
-(4, (SELECT id FROM products WHERE name = 'Джинсы классические синие'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-02-22 09:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Алексей Иванов')), (SELECT id FROM products WHERE name = 'Asus ROG Zephyrus G14'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-02-22 09:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Алексей Иванов')), (SELECT id FROM products WHERE name = 'Джинсы классические синие'), 2),
 
--- Заказ #5 (Елена Смирнова) - Платье летнее + Юбка + Набор тарелок
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(5, (SELECT id FROM products WHERE name = 'Платье летнее цветочное'), 2),
-(5, (SELECT id FROM products WHERE name = 'Юбка миди кожаная'), 1),
-(5, (SELECT id FROM products WHERE name = 'Набор тарелок 12 шт'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-03-05 16:20:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Платье летнее цветочное'), 2),
+((SELECT id FROM orders WHERE order_date = '2026-03-05 16:20:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Юбка миди кожаная'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-03-05 16:20:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Набор тарелок 12 шт'), 1),
 
--- Заказ #6 (Дмитрий Козлов) - Xiaomi 13 Pro + Футболка + Стул
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(6, (SELECT id FROM products WHERE name = 'Xiaomi 13 Pro'), 1),
-(6, (SELECT id FROM products WHERE name = 'Футболка хлопковая белая'), 3),
-(6, (SELECT id FROM products WHERE name = 'Стул офисный'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-03-10 13:10:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Дмитрий Козлов')), (SELECT id FROM products WHERE name = 'Xiaomi 13 Pro'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-03-10 13:10:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Дмитрий Козлов')), (SELECT id FROM products WHERE name = 'Футболка хлопковая белая'), 3),
+((SELECT id FROM orders WHERE order_date = '2026-03-10 13:10:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Дмитрий Козлов')), (SELECT id FROM products WHERE name = 'Стул офисный'), 2),
 
--- Заказ #7 (Мария Сидорова) - MacBook Air + Платье вечернее
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(7, (SELECT id FROM products WHERE name = 'MacBook Air 13" M2'), 1),
-(7, (SELECT id FROM products WHERE name = 'Платье вечернее черное'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-03-25 15:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Мария Сидорова')), (SELECT id FROM products WHERE name = 'MacBook Air 13" M2'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-03-25 15:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Мария Сидорова')), (SELECT id FROM products WHERE name = 'Платье вечернее черное'), 1),
 
--- Заказ #8 (Анна Воробьева) - Lenovo ThinkPad + Сковорода
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(8, (SELECT id FROM products WHERE name = 'Lenovo ThinkPad X1 Carbon'), 1),
-(8, (SELECT id FROM products WHERE name = 'Сковорода антипригарная'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-04-01 10:00:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Анна Воробьева')), (SELECT id FROM products WHERE name = 'Lenovo ThinkPad X1 Carbon'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-01 10:00:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Анна Воробьева')), (SELECT id FROM products WHERE name = 'Сковорода антипригарная'), 2),
 
--- Заказ #9 (Сергей Михайлов) - iPhone 15 Pro Max + Чехол + Зарядка
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(9, (SELECT id FROM products WHERE name = 'iPhone 15 Pro Max'), 2),
-(9, (SELECT id FROM products WHERE name = 'Чехол для телефона'), 2),
-(9, (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-04-05 12:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Сергей Михайлов')), (SELECT id FROM products WHERE name = 'iPhone 15 Pro Max'), 2),
+((SELECT id FROM orders WHERE order_date = '2026-04-05 12:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Сергей Михайлов')), (SELECT id FROM products WHERE name = 'Чехол для телефона'), 2),
+((SELECT id FROM orders WHERE order_date = '2026-04-05 12:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Сергей Михайлов')), (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 1),
 
--- Заказ #10 (Ольга Новикова) - Джинсы скинни + Футболка поло
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(10, (SELECT id FROM products WHERE name = 'Джинсы скинни черные'), 1),
-(10, (SELECT id FROM products WHERE name = 'Футболка поло черная'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-04-10 09:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Ольга Новикова')), (SELECT id FROM products WHERE name = 'Джинсы скинни черные'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-10 09:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Ольга Новикова')), (SELECT id FROM products WHERE name = 'Футболка поло черная'), 2),
 
--- Заказ #11 (Андрей Соколов) - Asus Vivobook + Мышь (нет в базе, пропустим) + Стол
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(11, (SELECT id FROM products WHERE name = 'Asus Vivobook 15'), 1),
-(11, (SELECT id FROM products WHERE name = 'Стол письменный'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-04-12 17:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Андрей Соколов')), (SELECT id FROM products WHERE name = 'Asus Vivobook 15'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-12 17:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Андрей Соколов')), (SELECT id FROM products WHERE name = 'Стол письменный'), 1),
 
--- Заказ #12 (Татьяна Кузнецова) - Samsung Galaxy Z Fold 4 + Наушники
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(12, (SELECT id FROM products WHERE name = 'Samsung Galaxy Z Fold 4'), 1),
-(12, (SELECT id FROM products WHERE name = 'Наушники AirPods Pro'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-04-15 11:20:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Татьяна Кузнецова')), (SELECT id FROM products WHERE name = 'Samsung Galaxy Z Fold 4'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-15 11:20:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Татьяна Кузнецова')), (SELECT id FROM products WHERE name = 'Наушники AirPods Pro'), 1),
 
--- Заказ #13 (Алексей Иванов) - MacBook Pro + Зарядка + Набор тарелок
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(13, (SELECT id FROM products WHERE name = 'MacBook Pro 14" M3'), 1),
-(13, (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 2),
-(13, (SELECT id FROM products WHERE name = 'Набор тарелок 12 шт'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-04-18 14:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Алексей Иванов')), (SELECT id FROM products WHERE name = 'MacBook Pro 14" M3'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-18 14:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Алексей Иванов')), (SELECT id FROM products WHERE name = 'Зарядное устройство 20W'), 2),
+((SELECT id FROM orders WHERE order_date = '2026-04-18 14:30:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Алексей Иванов')), (SELECT id FROM products WHERE name = 'Набор тарелок 12 шт'), 1),
 
--- Заказ #14 (Елена Смирнова) - Платье летнее + Юбка + Футболка
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(14, (SELECT id FROM products WHERE name = 'Платье летнее цветочное'), 1),
-(14, (SELECT id FROM products WHERE name = 'Юбка миди кожаная'), 1),
-(14, (SELECT id FROM products WHERE name = 'Футболка хлопковая белая'), 2);
+((SELECT id FROM orders WHERE order_date = '2026-04-20 13:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Платье летнее цветочное'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-20 13:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Юбка миди кожаная'), 1),
+((SELECT id FROM orders WHERE order_date = '2026-04-20 13:15:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Елена Смирнова')), (SELECT id FROM products WHERE name = 'Футболка хлопковая белая'), 2),
 
--- Заказ #15 (Дмитрий Козлов) - Xiaomi 13 Pro + Стул
-INSERT INTO order_items (order_id, product_id, quantity) VALUES
-(15, (SELECT id FROM products WHERE name = 'Xiaomi 13 Pro'), 2),
-(15, (SELECT id FROM products WHERE name = 'Стул офисный'), 1);
+((SELECT id FROM orders WHERE order_date = '2026-04-25 10:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Дмитрий Козлов')), (SELECT id FROM products WHERE name = 'Xiaomi 13 Pro'), 2),
+((SELECT id FROM orders WHERE order_date = '2026-04-25 10:45:00' AND customer_id = (SELECT id FROM customers WHERE name = 'Дмитрий Козлов')), (SELECT id FROM products WHERE name = 'Стул офисный'), 1);
